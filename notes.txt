@@ -1,0 +1,35 @@
+About:
+Summary - 
+
+Rolldown.gg is a small web application that allows you to calculate your odds of getting a desired champion in League of Legends: Teamfight Tactics. It was developed using Python, Flask, Bootstrap, and Numpy.
+If you experience any bugs, please email [here] or message [here] on reddit so I can fix them!
+
+Math explanation
+The program begins by calculating the probablities of rolling 0, 1, 2, 3, 4, or 5 units of the desired cost using the tables provided by riot games, and a series of "n choose k" operations. [link]
+Given that we've rolled X number of units of the desired cost, we now calculate the odds of Y of those units being the specific unit we desire, from Y=0 to Y=X. 
+Since the two events are dependent (we need to first roll 3 1 star units in the shop in order to have the possibility that those 3 units are the desired unit), we can calculate the joint probability by multiplying the two values together for each case. 
+We can now calculate the expected value for a given by multiplying the probability of each case by the number of desired units obtained in the event that it occurs. Summing together all of these values gives us the total expected value for a single roll.
+Finding the expected number of units for a given amount of gold is now possible as well. We can simply multiply the expected number of units per roll by the player's amount of gold and divide by two to get the answer. 
+In order to find the probability of rolling at least one desired unit in a given roll, we can take the probability of each individual case that results in at least one desired unit being obtained and add them together.
+Finally, we can use the probability of rolling at least one specific unit in order to find the probability of rolling at least one unit in the even that the player spends all their gold. To do this, we use the formula: Probability of at least one unit = 1-(1-probability of getting one desired unit per roll)^(gold/2)
+
+Special thanks to reddit user [x] for doing the groundwork on the math and developing the original excel sheet for this.
+Other helpful information:
+Odds tables
+Math explanation on reddit
+
+---------------
+
+Help:
+
+How to use the calculator
+The range of valid inputs for each number are listed next to the name.
+In order to get the most accurate assessment possible, you need to "scout" other player's boards and tally up both the total number of units gone, as well as the number of units that share the same cost as your desired unit. If you do not have enough time to gather both of these variables, the latter is far more impactful for the final result.
+
+Explanation of output
+Ont Unit Probability Per Roll: The chance that you will obtain at least one of your desired units when rolling a single time (or advancing stages).
+Expected Units Per Roll: The average number of desired units that will appear in your shop per roll.
+
+One Unit Probability - Total Gold: The chance that you will obtain at least one unit if you spend all your gold (known as "rolling down").
+
+Expected Units - Total Gold: The average number of desired units that will appear if you spend all of your gold. 

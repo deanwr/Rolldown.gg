@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h2>About</h2>
+	<p>Rolldown.gg is a small web application that allows you to calculate your odds of obtaining a desired unit in the online strategy game League of Legends: Teamfight Tactics. It was developed using Python, Flask, Bootstrap, and Numpy.</p>
+	<p>If you experience any bugs, please email rolldown.gg@gmail.com so I can fix them!<p>
+
+	<h2>Math Explanation</h2>
+	<p>Each time the shop is refreshed in Teamfight Tactics, you are given a selection of five units to purchase, each costing between one and five in-game gold. As your in-game level rises, the probability of being presented units of higher value in the shop increases. <br><br>
+	The costs of each unit are in the shop are determined independently, and thus follow a <a href="https://en.wikipedia.org/wiki/Binomial_distribution">binomial distribution</a>. However, since the pool of available units is shared by all 8 players, the probability of being presented a specific unit of a given cost depends on the units that are currently on each player's board. Thus, the odds of a player being presented a specific unit follow a <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">hypergeometric distribution</a>. <br><br>
+	The program begins by calculating the probablities of rolling 0, 1, 2, 3, 4, or 5 units of the desired cost using the shop probability tables provided by Riot Games, and a series of <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">"n choose k"</a> operations. <br><br>
+	Given that we've rolled X number of units of the desired cost, we now calculate the odds of Y of those units being the specific unit we desire, from Y=0 to Y=X for each case, with X ranging from 0 to 5. <br><br>
+	Since the two events are dependent (we need to first roll 3 1 star units in the shop in order to have the possibility that those 3 units are the desired unit), we can calculate the joint probability using <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Baye's Theorem</a>. <br><br>
+	We can now calculate expected value by multiplying the probability of each case by the number of desired units obtained in the event that it occurs. Summing together all of these values gives us the total expected value for a single roll. <br><br>
+	Finding the expected number of units for a given amount of gold is now possible as well. We can simply multiply the expected number of units per roll by the player's amount of gold and floor divide by two to get the answer. (Floor division is used as opposed to regular division, since you need a minimum of 2 gold to roll once.)<br><br>
+	In order to find the probability of rolling at least one desired unit in a given roll, we can take the probability of each individual case that results in at least one desired unit being obtained and add them together.<br><br>
+	Finally, we can use the probability of rolling at least one specific unit in order to find the probability of rolling at least one unit in the event that the player spends all their gold. To do this, we use the formula: Probability of at least one unit = 1-(1-probability of getting one desired unit per roll)^(gold//2)</p>
+
+{% endblock content %}

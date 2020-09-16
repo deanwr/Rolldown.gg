@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h2>How to use the calculator</h2>
+	<p>The range of valid inputs for each number are as follows:<br>
+	<b>Level:</b> 1-9 <br>
+	<b>Unit Cost:</b> 1-5 <br>
+	<b>Units of Same Cost Gone:</b> >=0 <br>
+	<b>Units Gone</b> >=0 <br>
+	<b>Gold:</b> >=0 <br><br>
+	In order to get the most accurate assessment possible, you need to "scout" other player's boards and tally up both the total number of units gone, as well as the number of units that share the same cost as your desired unit. If you do not have enough time to gather both of these variables, the latter is far more impactful for the final result.<br><br>
+	Simply fill in the numbers to the best of your ability, and you will be provided with the odds of obtaining your desired unit!</p>
+
+	<h2>Explanation of output</h2>
+	<p><b>One Unit Probability Per Roll:</b> The chance that you will obtain at least one of your desired units when rolling a single time (or advancing stages).<br>
+	<b>Expected Units Per Roll:</b> The average number of desired units that will appear in your shop per roll.<br>
+	<b>One Unit Probability - Total Gold:</b> The chance that you will obtain at least one unit if you spend all your gold (known as "rolling down").<br>
+	<b>Expected Units - Total Gold:</b> The average number of desired units that will appear if you spend all of your gold.</p>
+{% endblock content %}
